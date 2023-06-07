@@ -1,6 +1,6 @@
 from database import db
 from telethon import events
-from config import main_channel
+from create_client import main_channel
 from create_client import client
 
 

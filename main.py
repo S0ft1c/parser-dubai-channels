@@ -1,8 +1,8 @@
 from telethon import events
-from config import *
 from database import db
 from channel_handler import channel_handler
 from create_client import client
+from create_client import main_channel
 
 
 help_text = """**Вот все команды:**
