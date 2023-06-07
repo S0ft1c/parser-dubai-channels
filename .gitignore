@@ -155,3 +155,5 @@ database.sqlite3
 config.py
 *.session
 test.py
+public_key
+private_key.ppk
