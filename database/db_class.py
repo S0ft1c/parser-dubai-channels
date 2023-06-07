@@ -35,4 +35,3 @@ class Database:
 
 
 db = Database()
-print(db.fetchall("select * from channels"))

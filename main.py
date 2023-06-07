@@ -1,10 +1,24 @@
-import telethon
 from telethon import events
 from config import *
 from database import db
 from channel_handler import channel_handler
 from create_client import client
 
+
+help_text = """**Вот все команды:**
+
+/add_channel <сам канал> - добавить новый канал на прослушку
+
+/del_channel <сам канал> - удалить канал на прослушку
+
+/list_channels - список всех каналов, которые на прослушке
+
+/add_phrase <сама фраза> - добавить новую фразу (ключевое слово)
+
+/del_phrase <сама фраза> - удалить фразу (ключевое слово)
+
+/list_phrases - список всех фраз (ключевых слов)
+"""
 
 for c in [str(el[1]) for el in db.fetchall("SELECT * FROM channels")]:
     client.add_event_handler(channel_handler, events.NewMessage(c))
@@ -58,7 +72,9 @@ async def main_channel_handler(event: events.NewMessage):
         ph = '\n'.join([str(el[1])
                        for el in db.fetchall("SELECT * FROM phrases")])
         await client.send_message(event.chat_id, f"Список плюс-фраз\n{ph}")
+        
+    elif message.startswith("/help"):
+        await client.send_message(event.chat_id, help_text)
 
 
-print(client.list_event_handlers())
 client.run_until_disconnected()
