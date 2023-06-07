@@ -26,9 +26,6 @@ for c in [str(el[1]) for el in db.fetchall("SELECT * FROM channels")]:
 
 @client.on(events.NewMessage(main_channel))
 async def main_channel_handler(event: events.NewMessage):
-    print(event.media)
-    print(db.fetchall("select * from channels"))
-    print(db.fetchall("select * from phrases"))
 
     message = event.message.message
 
@@ -36,7 +33,7 @@ async def main_channel_handler(event: events.NewMessage):
     if message.startswith("/add_channel"):
         db.execute("INSERT INTO channels (channel) VALUES (?)",
                    (message.split()[1],))
-        await client.send_message(event.chat_id, "Успешно доабвлен новый канал на прослушку!")
+        await client.send_message(event.chat_id, "Успешно добавлен новый канал на прослушку!")
         client.add_event_handler(
             channel_handler, events.NewMessage(message.split()[1]))
         print(client.list_event_handlers())
@@ -59,7 +56,7 @@ async def main_channel_handler(event: events.NewMessage):
     elif message.startswith("/add_phrase"):
         db.execute("INSERT INTO phrases (phrase) VALUES (?)",
                    (message.split()[1],))
-        await client.send_message(event.chat_id, "Успешно доабвлена новая плюс-фраза!")
+        await client.send_message(event.chat_id, "Успешно добавлена новая плюс-фраза!")
 
     # delete phrase from database
     elif message.startswith("/del_phrase"):
