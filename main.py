@@ -24,7 +24,7 @@ for c in [str(el[1]) for el in db.fetchall("SELECT * FROM channels")]:
     client.add_event_handler(channel_handler, events.NewMessage(c))
 
 
-@client.on(events.NewMessage(main_channel)
+@client.on(events.NewMessage(main_channel))
 async def main_channel_handler(event: events.NewMessage):
     print(event.media)
     print(db.fetchall("select * from channels"))
