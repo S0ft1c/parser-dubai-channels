@@ -151,7 +151,5 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 .idea/
 __pycache__/
-database.sqlite3
-config.py
 *.session
 test.py
