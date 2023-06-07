@@ -15,7 +15,7 @@ async def channel_handler(event: events.NewMessage):
     else:
         for el in ph:
             if el in message.lower():
-                
+                print(event)
                 # get the autor
                 if event.message.post:  # if it's the post
                     author = f"**Это был пост из канала! Определить автора невозможно**"
