@@ -18,7 +18,7 @@ async def channel_handler(event: events.NewMessage):
                 
                 # get the autor
                 if event.message.post:  # if it's the post
-                    author = f"`{event.message.post_author}`\t**Это был пост из канала! Указано только имя пользователя НЕ ЮЗЕРНЕЙМ**"
+                    author = f"**Это был пост из канала! Определить автора невозможно**"
                 else:  # if it's the chat
                     author = await client.get_entity(event.message.from_id.user_id)
                     author = f"@{author.username}"
