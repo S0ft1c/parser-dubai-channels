@@ -14,21 +14,26 @@ async def channel_handler(event: events.NewMessage):
         pass
     else:
         for el in ph:
-            if el in message.lower():
-                print(event)
-                # get the autor
-                if event.message.post:  # if it's the post
-                    author = f"**Это был пост из канала! Определить автора невозможно**"
-                else:  # if it's the chat
-                    author = await client.get_entity(event.message.from_id.user_id)
-                    author = f"@{author.username}"
-                
-                # get the title of channel/chat
-                title = await client.get_entity(event.message.peer_id.channel_id)
-                title = title.username
-                
-                # this is the text of message
-                text = f"""Сообщение поста: 💬
+            for word in message.lower().split():
+                if el in word:
+                    print(event)
+                    
+                    # get the autor
+                    try:
+                        if event.message.post:  # if it's the post
+                            author = f"**Это был пост из канала! Определить автора невозможно**"
+                        else:  # if it's the chat
+                            author = await client.get_entity(event.message.from_id.user_id)
+                            author = f"@{author.username}"
+                    except:
+                        author = "не удалось определить автора"
+                    
+                    # get the title of channel/chat
+                    title = await client.get_entity(event.message.peer_id.channel_id)
+                    title = title.username
+                    
+                    # this is the text of message
+                    text = f"""Сообщение поста: 💬
 --- ---
 {message}
 --- ---
@@ -36,5 +41,5 @@ async def channel_handler(event: events.NewMessage):
 --- ---
 Ссылка на сообщение: https://t.me/{title}/{event.message.id}"""
 
-                await event.client.send_message(main_channel, text)
-                break
+                    await event.client.send_message(main_channel, text)
+                    break
