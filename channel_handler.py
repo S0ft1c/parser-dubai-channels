@@ -42,4 +42,4 @@ async def channel_handler(event: events.NewMessage):
 Ссылка на сообщение: https://t.me/{title}/{event.message.id}"""
 
                     await event.client.send_message(main_channel, text)
-                    break
+                    return
